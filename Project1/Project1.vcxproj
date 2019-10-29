@@ -118,6 +118,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aStar.h" />
+    <ClInclude Include="breadthFirst.h" />
+    <ClInclude Include="depthFirst.h" />
+    <ClInclude Include="display.h" />
+    <ClInclude Include="node.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
