@@ -35,11 +35,9 @@ void DisplayMenu()
 	cout << endl;
 	cout << "	1. A* algorithm" << endl;
 	cout << endl;
-	cout << "	2. Breadth-First Search" << endl;
+	cout << "	2. Breadth-First/Depth-First Search" << endl;
 	cout << endl;
-	cout << "	3. Depth-First Search" << endl;
-	cout << endl;
-	cout << "	4. Quit" << endl;
+	cout << "	3. Quit" << endl;
 	cout << endl;
 	cout << endl;
 	cout << endl;
@@ -61,11 +59,9 @@ void DisplayMenuError()
 	cout << endl;
 	cout << "	1. A* algorithm" << endl;
 	cout << endl;
-	cout << "	2. Breadth-First Search" << endl;
+	cout << "	2. Breadth-First/Depth-First Search" << endl;
 	cout << endl;
-	cout << "	3. Depth-First Search" << endl;
-	cout << endl;
-	cout << "	4. Quit" << endl;
+	cout << "	3. Quit" << endl;
 	cout << endl;
 	cout << endl;
 	cout << "  Error - Pleas enter a valid input" << endl;
@@ -73,7 +69,18 @@ void DisplayMenuError()
 
 }
 
+void DisplaySearchHeader()
+{
+	system("cls");
 
-
+	cout << endl;
+	cout << endl;
+	cout << "	Algorithms and Data Structures: LightMode" << endl;
+	cout << "	Breadth - First / Depth - First Search "<< endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << "	Please input all your nodes below" << endl;
+}
 
 

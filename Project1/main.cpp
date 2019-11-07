@@ -23,6 +23,8 @@
 #include <string>
 
 #include "display.h"
+#include "node.h"
+#include "graph.h"
 
 using namespace std;
 
@@ -41,6 +43,36 @@ void DepthAlgorithm()
 
 }
 
+
+void DFSSearch()
+{
+	DisplaySearchHeader();
+
+	//while (true)
+	//{
+	//	
+	//
+	//}
+
+	CGraph graph(4);
+	graph.AddEdge(0, 1);
+	graph.AddEdge(0, 2);
+	graph.AddEdge(1, 2);
+	graph.AddEdge(2, 0);
+	graph.AddEdge(2, 3);
+	graph.AddEdge(3, 3);
+
+	cout << "Following is Depth First Traversal"
+		" (starting from vertex 1) \n";
+	graph.DFS(1);
+
+	cout << "Following is Breadth First Traversal "
+		<< "(starting from vertex 2) \n";
+	graph.BFS(2);
+
+	int iTemp = 0;
+	cin >> iTemp;
+}
 
 
 void InputMenu() 
@@ -73,20 +105,14 @@ Start:
 	// Breadth-First Search
 	else if (iInput == 2)
 	{
-
+		DFSSearch();
 		
 	}
 
-	// Depth-First Search
-	else if (iInput == 3) 
-	{
 
-		
-	}
-	
 
 	//Exit function
-	else if (iInput == 4) 
+	else if (iInput == 3) 
 	{
 		exit(0);
 	}
@@ -102,6 +128,9 @@ Start:
 		goto Start;
 	}
 }
+
+
+
 
 
 int main()

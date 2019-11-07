@@ -116,12 +116,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aStar.h" />
-    <ClInclude Include="breadthFirst.h" />
-    <ClInclude Include="depthFirst.h" />
+    <ClInclude Include="graph.h" />
+    <ClInclude Include="search.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="node.h" />
   </ItemGroup>
