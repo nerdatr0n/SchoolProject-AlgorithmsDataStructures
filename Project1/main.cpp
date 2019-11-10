@@ -23,7 +23,7 @@
 #include <string>
 
 #include "display.h"
-#include "node.h"
+
 #include "graph.h"
 
 using namespace std;
@@ -54,21 +54,28 @@ void DFSSearch()
 	//
 	//}
 
-	CGraph graph(4);
+	CGraph graph("A, B, C, F, d, TEst, 7");
 	graph.AddEdge(0, 1);
 	graph.AddEdge(0, 2);
 	graph.AddEdge(1, 2);
 	graph.AddEdge(2, 0);
 	graph.AddEdge(2, 3);
-	graph.AddEdge(3, 3);
+	graph.AddEdge(3, 4);
+	graph.AddEdge(4, 5);
+	graph.AddEdge(1, 6);
 
-	cout << "Following is Depth First Traversal"
-		" (starting from vertex 1) \n";
-	graph.DFS(1);
 
-	cout << "Following is Breadth First Traversal "
-		<< "(starting from vertex 2) \n";
-	graph.BFS(2);
+	cout << "Depth First Traversal" << endl;
+	graph.DFS();
+	cout << endl;
+
+
+	cout << "Breadth First Traversal" << endl;
+	graph.BFS();
+	cout << endl;
+
+	
+
 
 	int iTemp = 0;
 	cin >> iTemp;
