@@ -13,6 +13,7 @@
 
 #include "node.h"
 
+
 using namespace std;
 
 class CGraph
@@ -28,13 +29,19 @@ public:
 
 	string GetNodeName(int _nodeNumber);
 
+	int NodeNameToNumber(string _nodeName);
+
+
 private:
 
 	int m_iNumberOfVertices;
 
+	int m_iNumberOfNodes;
+
 	list<int> *m_iNumberOfNode;
 
-	CNode* m_pAdjcentNodes[];
+	vector<CNode*> m_pAllNodes;
+	//CNode* m_pAdjcentNodes[];
 
 	// keeps doing the DFS thing
 	void DFSFunction(int v, bool visited[]);

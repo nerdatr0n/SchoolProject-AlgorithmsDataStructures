@@ -11,6 +11,9 @@ CGraph::CGraph(string _strNamesOfNodes)
 	// Gets number of commers/nodes
 	int iNumberOfEdges = count(_strNamesOfNodes.begin(), _strNamesOfNodes.end(), ',') + 1;
 
+	m_iNumberOfNodes = count(_strNamesOfNodes.begin(), _strNamesOfNodes.end(), ',') + 1;
+		
+
 	this->m_iNumberOfVertices = iNumberOfEdges;
 	m_iNumberOfNode = new list<int>[iNumberOfEdges];
 
@@ -31,15 +34,13 @@ CGraph::CGraph(string _strNamesOfNodes)
 		CNode* pNode = new CNode(token);
 
 
-		m_pAdjcentNodes[i] = pNode;
+		m_pAllNodes.push_back(pNode);
 
 		i++;
 	}
 	
 	CNode* pNode = new CNode(_strNamesOfNodes);
-	m_pAdjcentNodes[i] = pNode;
-
-
+	m_pAllNodes.push_back(pNode);
 }
 
 CGraph::~CGraph()
@@ -50,7 +51,7 @@ CGraph::~CGraph()
 string CGraph::GetNodeName(int _nodeNumber)
 {
 	
-	CNode* pNode = m_pAdjcentNodes[_nodeNumber];
+	CNode* pNode = m_pAllNodes[_nodeNumber];
 	return pNode->GetNodeName();
 
 }
@@ -61,6 +62,20 @@ void CGraph::AddEdge(int _iVector1, int _iVector2)
 	m_iNumberOfNode[_iVector2].push_back(_iVector1);
 }
 
+
+int CGraph::NodeNameToNumber(string _nodeName)
+{
+
+	for (int i = 0; i < m_iNumberOfVertices; i++)
+	{
+		if (_nodeName == m_pAllNodes[i]->GetNodeName())
+		{
+			return i;
+		}
+	}
+	// Return fail
+	return -1;
+}
 
 
 
