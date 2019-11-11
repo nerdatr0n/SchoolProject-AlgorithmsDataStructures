@@ -21,6 +21,7 @@
 #include <Windows.h>
 #include <stdlib.h>
 #include <string>
+#include <sstream>
 
 #include "display.h"
 
@@ -43,26 +44,61 @@ void DepthAlgorithm()
 
 }
 
+bool CheckNodeInputErrors(string _strNodeInput)
+{
+	if (_strNodeInput.front() == ',' or _strNodeInput.back() == ',')
+	{
+		return false;
+	}
 
-void DFSSearch()
+	for (int i = 0; i < _strNodeInput.size() - 1; i++)
+	{
+		if (_strNodeInput.at(i) == ',' and _strNodeInput.at(i + 1) == ',')
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void Search()
 {
 	DisplaySearchHeader();
 
-	//while (true)
-	//{
-	//	
-	//
-	//}
+	string strNodeInput = "";
 
-	CGraph graph("A, B, C, F, d, TEst, 7");
-	graph.AddEdge(0, 1);
-	graph.AddEdge(0, 2);
-	graph.AddEdge(1, 2);
-	graph.AddEdge(2, 0);
-	graph.AddEdge(2, 3);
-	graph.AddEdge(3, 4);
-	graph.AddEdge(4, 5);
-	graph.AddEdge(1, 6);
+	DisplaySearchHeader();
+	cout << "	Please input Nodes seperated by ','" << endl;
+
+
+	cin.clear();
+	cin.ignore(9999999,'\n');
+	std::getline(cin, strNodeInput);
+
+
+	while (!CheckNodeInputErrors(strNodeInput))
+	{
+		DisplaySearchHeader();
+		cout << "	Error Please input Nodes seperated by ','" << endl;
+
+		cin.clear();
+
+		getline(cin, strNodeInput);
+
+		
+
+
+	}
+
+	CGraph graph(strNodeInput);
+	//graph.AddEdge(0, 1);
+	//graph.AddEdge(0, 2);
+	//graph.AddEdge(1, 2);
+	//graph.AddEdge(2, 3);
+	//graph.AddEdge(3, 4);
+	//graph.AddEdge(4, 5);
+	//graph.AddEdge(1, 6);
 
 
 	cout << "Depth First Traversal" << endl;
@@ -87,52 +123,54 @@ void InputMenu()
 
 	bool bErrorThrown = false;
 
-
-Start:
-	if (bErrorThrown == false)
-	{
-		DisplayMenu();
-	}
-	else
-	{
-		DisplayMenuError();
-	}
-	
-	
-	// Inputs
-	int iInput;
-	cin >> iInput;
-
-	// A* algorithm
-	if (iInput == 1) 
+	while (true)
 	{
 		
-	}
 
-	// Breadth-First Search
-	else if (iInput == 2)
-	{
-		DFSSearch();
-		
-	}
+		if (bErrorThrown == false)
+		{
+			DisplayMenu();
+		}
+		else
+		{
+			DisplayMenuError();
+		}
+		bErrorThrown = false;
+
+		// Inputs
+		int iInput;
+		cin >> iInput;
+
+		// A* algorithm
+		if (iInput == 1)
+		{
+
+		}
+
+		// Search
+		else if (iInput == 2)
+		{
+			Search();
+
+		}
 
 
 
-	//Exit function
-	else if (iInput == 3) 
-	{
-		exit(0);
-	}
+		//Exit function
+		else if (iInput == 3)
+		{
+			exit(0);
+		}
 
-	// recalls this function 
-	else 
-	{
-		bErrorThrown = true;
+		// recalls this function 
+		else
+		{
+			bErrorThrown = true;
 
-		// Clears the input
-		cin.clear();
-		cin.ignore(INT_MAX, '\n');
-		goto Start;
+			// Clears the input
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
 	}
 }
 

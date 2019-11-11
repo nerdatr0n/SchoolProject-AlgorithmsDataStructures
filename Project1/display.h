@@ -64,7 +64,7 @@ void DisplayMenuError()
 	cout << "	3. Quit" << endl;
 	cout << endl;
 	cout << endl;
-	cout << "  Error - Pleas enter a valid input" << endl;
+	cout << "  Error - Please enter a valid input" << endl;
 	cout << endl;
 
 }
@@ -80,7 +80,6 @@ void DisplaySearchHeader()
 	cout << endl;
 	cout << endl;
 	cout << endl;
-	cout << "	Please input all your nodes below" << endl;
 }
 
 

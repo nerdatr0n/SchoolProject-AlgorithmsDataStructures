@@ -7,6 +7,7 @@ CNode::CNode(string _strName)
 
 CNode::~CNode()
 {
+
 }
 
 string CNode::GetNodeName()

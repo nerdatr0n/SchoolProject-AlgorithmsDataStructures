@@ -14,6 +14,7 @@ CGraph::CGraph(string _strNamesOfNodes)
 	this->m_iNumberOfVertices = iNumberOfEdges;
 	m_iNumberOfNode = new list<int>[iNumberOfEdges];
 
+	cout << _strNamesOfNodes << endl;
 
 	std::string delimiter = ",";
 	
@@ -31,13 +32,17 @@ CGraph::CGraph(string _strNamesOfNodes)
 				
 		CNode* pNode = new CNode(token);
 
+		cout << token << endl;
+		cout << _strNamesOfNodes << endl;
+
 		m_pAdjcentNodes[i] = pNode;
 
 		i++;
 	}
 	
-
-
+	CNode* pNode = new CNode(_strNamesOfNodes);
+	m_pAdjcentNodes[i] = pNode;
+	cout << _strNamesOfNodes << endl;
 
 }
 
@@ -49,7 +54,7 @@ CGraph::~CGraph()
 string CGraph::GetNodeName(int _nodeNumber)
 {
 	
-	CNode* pNode = m_pAdjcentNodes[_nodeNumber - 1];
+	CNode* pNode = m_pAdjcentNodes[_nodeNumber];
 	return pNode->GetNodeName();
 
 }
@@ -57,6 +62,7 @@ string CGraph::GetNodeName(int _nodeNumber)
 void CGraph::AddEdge(int _iVector1, int _iVector2)
 {
 	m_iNumberOfNode[_iVector1].push_back(_iVector2);
+	m_iNumberOfNode[_iVector2].push_back(_iVector1);
 }
 
 
@@ -68,7 +74,7 @@ void CGraph::DFSFunction(int _iVector, bool visited[])
 	visited[_iVector] = true;
 	cout << GetNodeName(_iVector) << " ";
 
-	
+
 
 	list<int>::iterator i;
 
@@ -85,7 +91,7 @@ void CGraph::DFSFunction(int _iVector, bool visited[])
 
 void CGraph::DFS()
 {
-	int v = 1;
+	int v = 0;
 	// Mark all the vertices as not visited 
 	bool *visited = new bool[m_iNumberOfVertices];
 
@@ -97,12 +103,15 @@ void CGraph::DFS()
 	// Call the recursive helper function 
 	// to print DFS traversal 
 	DFSFunction(v, visited);
+
+
+	
 }
 
 
 void CGraph::BFS()
 {
-	int s = 1;
+	int s = 0;
 	// Mark all the vertices as not visited 
 	bool *visited = new bool[m_iNumberOfVertices];
 
