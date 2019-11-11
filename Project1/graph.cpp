@@ -14,8 +14,6 @@ CGraph::CGraph(string _strNamesOfNodes)
 	this->m_iNumberOfVertices = iNumberOfEdges;
 	m_iNumberOfNode = new list<int>[iNumberOfEdges];
 
-	cout << _strNamesOfNodes << endl;
-
 	std::string delimiter = ",";
 	
 	int i = 0;
@@ -32,8 +30,6 @@ CGraph::CGraph(string _strNamesOfNodes)
 				
 		CNode* pNode = new CNode(token);
 
-		cout << token << endl;
-		cout << _strNamesOfNodes << endl;
 
 		m_pAdjcentNodes[i] = pNode;
 
@@ -42,7 +38,7 @@ CGraph::CGraph(string _strNamesOfNodes)
 	
 	CNode* pNode = new CNode(_strNamesOfNodes);
 	m_pAdjcentNodes[i] = pNode;
-	cout << _strNamesOfNodes << endl;
+
 
 }
 

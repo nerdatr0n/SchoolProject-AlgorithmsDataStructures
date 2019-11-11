@@ -62,36 +62,110 @@ bool CheckNodeInputErrors(string _strNodeInput)
 	return true;
 }
 
+
+bool CheckForDigits(const string &str)
+{
+	return str.find_first_not_of("0123456789") == string::npos;
+}
+
+
+bool CheckEdgeAmountErrors(string _strEdgeAmount)
+{
+	if (!CheckForDigits(_strEdgeAmount))
+	{
+		return false;
+	}
+
+	int iEdgeAmount = stoi(_strEdgeAmount);
+
+	if (iEdgeAmount > 0 and iEdgeAmount < 100)
+	{
+		return true;
+	}
+	
+	return false;
+
+}
+
+
 void Search()
 {
 	DisplaySearchHeader();
 
 	string strNodeInput = "";
+	string strEdgeAmount = "";
 
+	int iEdgeAmount = 0;
+
+
+	  /////////////////////
+	 // Inputting nodes //
+	/////////////////////
 	DisplaySearchHeader();
-	cout << "	Please input Nodes seperated by ','" << endl;
+	cout << "	Please input Nodes seperated by ',' (All nodes must have diffrent names)" << endl;
 
-
+	// Gets and clears the input
 	cin.clear();
 	cin.ignore(9999999,'\n');
-	std::getline(cin, strNodeInput);
+	getline(cin, strNodeInput);
 
 
 	while (!CheckNodeInputErrors(strNodeInput))
 	{
 		DisplaySearchHeader();
-		cout << "	Error Please input Nodes seperated by ','" << endl;
+		cout << "	Error - Please input Nodes seperated by ',' (All nodes must have diffrent names)" << endl;
 
 		cin.clear();
 
 		getline(cin, strNodeInput);
-
-		
-
-
 	}
 
 	CGraph graph(strNodeInput);
+
+
+
+	  ///////////////////////////
+	 // Inputting edge amount //
+	///////////////////////////
+	DisplaySearchHeader();
+	cout << "	Nodes:" << endl;
+	cout << strNodeInput << endl;
+	cout << endl;
+
+	cout << "	Please input the amount of edges (between 1 and 99)" << endl;
+	cin.clear();
+
+	getline(cin, strEdgeAmount);
+
+	while (!CheckEdgeAmountErrors(strEdgeAmount))
+	{
+		DisplaySearchHeader();
+		cout << "	Nodes:" << endl;
+		cout << strNodeInput << endl;
+		cout << endl;
+
+		cout << "	Error - Please input the amount of edges (between 1 and 99)" << endl;
+		cin.clear();
+
+		getline(cin, strEdgeAmount);
+	}
+
+
+	
+	  /////////////////////
+	 // Inputting edges //
+	/////////////////////
+	iEdgeAmount = stoi(strEdgeAmount);
+
+	while (iEdgeAmount != 0)
+	{
+		
+
+		
+
+	}
+
+	
 	//graph.AddEdge(0, 1);
 	//graph.AddEdge(0, 2);
 	//graph.AddEdge(1, 2);
