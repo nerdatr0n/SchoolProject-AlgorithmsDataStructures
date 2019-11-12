@@ -1,3 +1,17 @@
+//
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+//
+// (c) 2019 Media Design School
+//
+// File Name   : grid.cpp
+// Description : main grid file
+// Author      : Andrew Barnes and David Haverland
+// Mail        : andrew.bar8456@mediadesign.school.nz and david.hav8466@mediadesign.school.nz
+//
+
 #include "grid.h"
 
 PathFinding::PathFinding(int _iStartX, int _iStartY, int _iEndX, int _iEndY)
@@ -338,7 +352,7 @@ CGridNode* PathFinding::GetLowestFCostNode(vector<CGridNode*>* pathNodeList)
 	while (it != m_pOpenList->end()) {
 		CGridNode* myNodePointer = *it;
 		
-		if (LowestNode->GetFCost() < myNodePointer->GetFCost())
+		if (LowestNode->GetFCost() > myNodePointer->GetFCost())
 		{
 			LowestNode = myNodePointer;
 		}

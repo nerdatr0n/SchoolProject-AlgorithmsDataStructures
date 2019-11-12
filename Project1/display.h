@@ -6,8 +6,8 @@
 //
 // (c) 2019 Media Design School
 //
-// File Name   : main.cpp
-// Description : Main file
+// File Name   : display.h
+// Description : Displays things
 // Author      : Andrew Barnes and David Haverland
 // Mail        : andrew.bar8456@mediadesign.school.nz and david.hav8466@mediadesign.school.nz
 //
@@ -82,4 +82,17 @@ void DisplaySearchHeader()
 	cout << endl;
 }
 
+
+void DisplayAStarHeader()
+{
+	system("cls");
+
+	cout << endl;
+	cout << endl;
+	cout << "	Algorithms and Data Structures: LightMode" << endl;
+	cout << "	A Star Algorithm" << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+}
 

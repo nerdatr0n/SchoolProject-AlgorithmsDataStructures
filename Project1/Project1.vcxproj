@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aStar.h" />
+    <ClInclude Include="errorCheck.h" />
     <ClInclude Include="graph.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="gridNode.h" />
