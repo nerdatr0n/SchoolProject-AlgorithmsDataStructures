@@ -253,25 +253,25 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 	}
 
 	// Bottom Left
-	if (bCanDoBottomLeft && m_pGrid[c_iX - 1][c_iY + 1])
+	if (bCanDoBottomLeft && m_pGrid[c_iX - 1][c_iY + 1]->GetDisplayType() != 'X')
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX - 1][c_iY + 1]);
 	}
 
 	// Bottom Right
-	if (bCanDoBottomRight && m_pGrid[c_iX + 1][c_iY + 1])
+	if (bCanDoBottomRight && m_pGrid[c_iX + 1][c_iY + 1]->GetDisplayType() != 'X')
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX + 1][c_iY + 1]);
 	}
 
 	// Top Left
-	if (bCanDoTopLeft && m_pGrid[c_iX - 1][c_iY - 1])
+	if (bCanDoTopLeft && m_pGrid[c_iX - 1][c_iY - 1]->GetDisplayType() != 'X')
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX - 1][c_iY - 1]);
 	}
 
 	// Top Right
-	if (bCanDoTopRight && m_pGrid[c_iX + 1][c_iY - 1])
+	if (bCanDoTopRight && m_pGrid[c_iX + 1][c_iY - 1]->GetDisplayType() != 'X')
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX + 1][c_iY - 1]);
 	}
@@ -333,7 +333,7 @@ CGridNode* PathFinding::GetLowestFCostNode(vector<CGridNode*>* pathNodeList)
 	while (it != m_pOpenList->end()) {
 		CGridNode* myNodePointer = *it;
 		
-		if (LowestNode->GetFCost() > myNodePointer->GetFCost())
+		if (LowestNode->GetFCost() < myNodePointer->GetFCost())
 		{
 			LowestNode = myNodePointer;
 		}
