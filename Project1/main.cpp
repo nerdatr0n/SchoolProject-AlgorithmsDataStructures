@@ -32,20 +32,12 @@ using namespace std;
 
 void AStarAlgorithm()
 {
+	Grid
 
+
+	Astar
 }
 
-void BreadthAlgorithm()
-{
-
-
-
-}
-
-void DepthAlgorithm()
-{
-
-}
 
 
 
