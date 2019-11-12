@@ -49,9 +49,11 @@ PathFinding::~PathFinding()
 
 bool PathFinding::FindPath()
 {
+
+	CGridNode* currentNode;
 	while (m_pOpenList->size() != 0)
 	{
-		CGridNode* currentNode = GetLowestFCostNode(m_pOpenList);
+		currentNode = GetLowestFCostNode(m_pOpenList);
 		if (currentNode == endNode)
 		{
 			endNode = currentNode;
@@ -59,6 +61,7 @@ bool PathFinding::FindPath()
 			return true;
 		}
 
+		cout << "X:" << currentNode->GetX() << " Y:" << currentNode->GetY() << " FThing:" << currentNode->GetFCost() << endl;
 
 		// Removes node from open list
 		vector<CGridNode*>::iterator itOpenList = m_pOpenList->begin();
@@ -103,23 +106,29 @@ bool PathFinding::FindPath()
 				itClosedList++;
 			}
 
+
 			if (!bIsOnClosedList)
 			{
+
 				tempGCost = currentNode->GetGCost() + CalculateGDistanceCost(currentNode, NeighbourNodePointer);
-				if (tempGCost < NeighbourNodePointer->GetGCost()) 
+				//Sets the Nodes Costs
+				if (tempGCost < NeighbourNodePointer->GetGCost())
 				{
 					NeighbourNodePointer->SetCameFrom(currentNode);
 					NeighbourNodePointer->SetGCost(tempGCost);
 					NeighbourNodePointer->SetHCost(CalculateHDistanceCost(NeighbourNodePointer, endNode));
 					NeighbourNodePointer->GetFCost();
-
+				}
 					// If not in open list, add to open list
 					vector<CGridNode*>::iterator itOpenListAdd = m_pOpenList->begin();
+				
 
-					if (m_pOpenList->size() == 0) {
+					if (m_pOpenList->size() == 0) 
+					{
 						m_pOpenList->push_back(NeighbourNodePointer);
 					}
-					else {
+					else 
+					{
 						while (itOpenListAdd != m_pOpenList->end())
 						{
 							CGridNode* myNodePointer = *itOpenListAdd;
@@ -133,7 +142,7 @@ bool PathFinding::FindPath()
 					}
 					
 
-				}
+				
 
 			}
 
@@ -152,9 +161,9 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 {
 	vector<CGridNode*>* pNeighbourList = new vector<CGridNode*>();
 	bool bCanDoTopRight = true;
-	bool bCanDoTopleft = true;
+	bool bCanDoTopLeft = true;
 	bool bCanDoBottomRight = true;
-	bool bCanDoBottomleft = true;
+	bool bCanDoBottomLeft = true;
 
 	int c_iX = _pCurrentNode->GetX();
 	int c_iY = _pCurrentNode->GetY();
@@ -164,25 +173,31 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 	// Left
 	if (c_iX - 1 >= 0)
 	{
-		pTempPointer = m_pGrid[c_iX - 1][c_iY];
-		if (pTempPointer->GetDisplayType() == 'X')
+		if (m_pGrid[c_iX - 1][c_iY]->GetDisplayType() == 'X')
 		{
-			bool bCanDoTopleft = false;
-			bool bCanDoBottomleft = false;
+			bCanDoTopLeft = false;
+			bCanDoBottomLeft = false;
 		}
 		else
 		{
-			pNeighbourList->push_back(pTempPointer);
+			pNeighbourList->push_back(m_pGrid[c_iX - 1][c_iY]);
 		}
 
 	}
+	else
+	{
+		bCanDoTopLeft = false;
+		bCanDoBottomLeft = false;
+	}
+
+
 	// Right
-	if (c_iX + 1 <= 10)
+	if (c_iX + 1 <= 9)
 	{
 		if (m_pGrid[c_iX + 1][c_iY]->GetDisplayType() == 'X')
 		{
-			bool bCanDoTopRight = false;
-			bool bCanDoBottomRight = false;
+			bCanDoTopRight = false;
+			bCanDoBottomRight = false;
 		}
 		else
 		{
@@ -190,13 +205,19 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 		}
 
 	}
+	else
+	{
+		bCanDoTopRight = false;
+		bCanDoBottomRight = false;
+	}
+
 	// Top
 	if (c_iY - 1 >= 0)
 	{
 		if (m_pGrid[c_iX][c_iY - 1]->GetDisplayType() == 'X')
 		{
-			bool bCanDoTopRight = false;
-			bool bCanDoTopLeft = false;
+			bCanDoTopRight = false;
+			bCanDoTopLeft = false;
 		}
 		else
 		{
@@ -204,14 +225,20 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 		}
 
 	}
+	else
+	{
+		bCanDoTopRight = false;
+		bCanDoTopLeft = false;
+	}
+
 	// Bottom
-	if (c_iY + 1 <= 10)
+	if (c_iY + 1 <= 9)
 	{
 
 		if (m_pGrid[c_iX][c_iY + 1]->GetDisplayType() == 'X')
 		{
-			bool bCanDoBottomRight = false;
-			bool bCanDoBottomLeft = false;
+			bCanDoBottomRight = false;
+			bCanDoBottomLeft = false;
 		}
 		else
 		{
@@ -219,20 +246,31 @@ vector<CGridNode*>* PathFinding::GetNeighbourList(CGridNode* _pCurrentNode)
 		}
 
 	}
+	else
+	{
+		bCanDoBottomRight = false;
+		bCanDoBottomLeft = false;
+	}
 
-	if (bCanDoBottomleft && m_pGrid[c_iX - 1][c_iY + 1])
+	// Bottom Left
+	if (bCanDoBottomLeft && m_pGrid[c_iX - 1][c_iY + 1])
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX - 1][c_iY + 1]);
 	}
+
+	// Bottom Right
 	if (bCanDoBottomRight && m_pGrid[c_iX + 1][c_iY + 1])
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX + 1][c_iY + 1]);
 	}
 
-	if (bCanDoTopleft && m_pGrid[c_iX - 1][c_iY - 1])
+	// Top Left
+	if (bCanDoTopLeft && m_pGrid[c_iX - 1][c_iY - 1])
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX - 1][c_iY - 1]);
 	}
+
+	// Top Right
 	if (bCanDoTopRight && m_pGrid[c_iX + 1][c_iY - 1])
 	{
 		pNeighbourList->push_back(m_pGrid[c_iX + 1][c_iY - 1]);
@@ -251,7 +289,7 @@ bool PathFinding::SetNodeAsBlocker(int _iX, int _iY)
 		CurrentNode->SetDisplayType('X');
 		return true;
 	}
-	return true;
+	return false;
 }
 
 void PathFinding::CalculatePath()
@@ -265,13 +303,15 @@ void PathFinding::CalculatePath()
 		CurrentNode = CurrentNode->GetCameFrom();
 	}
 	CurrentNode->SetDisplayType('0');
+	endNode->SetDisplayType('E');
+
 }
 
 int PathFinding::CalculateHDistanceCost(CGridNode* _pFirstNode, CGridNode* _pLastNode)
 {
 	int iDistanceX = abs(_pFirstNode->GetX() - _pLastNode->GetX());
 	int iDistanceY = abs(_pFirstNode->GetY() - _pLastNode->GetY());
-	return abs(iDistanceX + iDistanceY);
+	return abs(iDistanceX + iDistanceY) * 10;
 }
 
 int PathFinding::CalculateGDistanceCost(CGridNode* _pFirstNode, CGridNode* _pLastNode)
@@ -309,19 +349,19 @@ CGridNode* PathFinding::GetLowestFCostNode(vector<CGridNode*>* pathNodeList)
 void PathFinding::DrawGrid()
 {
 	CGridNode* CurrentNode;
-
+	cout << endl;
 	
 
 	char Draw;
-	for (int x = 0; x < 10; x++)
+	for (int y = 0; y < 10; y++)
 	{
-		for (int y = 0; y < 10; y++)
+		for (int x = 0; x < 10; x++)
 		{
 
 			CurrentNode = m_pGrid[x][y];
 
 			Draw = CurrentNode->GetDisplayType();
-			cout << Draw;
+			cout << Draw << " ";
 
 
 		}

@@ -34,7 +34,9 @@ using namespace std;
 
 void AStarAlgorithm()
 {
-	PathFinding PathFind(1, 1, 4, 7);
+	PathFinding PathFind(9, 9, 0, 0);
+
+	//PathFind.SetNodeAsBlocker(3, 3);
 
 	if (PathFind.FindPath())
 	{
@@ -337,13 +339,13 @@ void Search()
 	cout << "Depth First Traversal" << endl;
 	graph.DFS();
 	cout << endl;
-
+	cout << endl;
 
 	cout << "Breadth First Traversal" << endl;
 	graph.BFS();
 	cout << endl;
-
-	
+	cout << endl;
+	cout << "Input anything to return to the menu" << endl;
 
 
 	int iTemp = 0;
