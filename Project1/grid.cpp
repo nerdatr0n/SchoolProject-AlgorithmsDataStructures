@@ -129,15 +129,20 @@ bool PathFinding::FindPath()
 				}
 				else 
 				{
+					bool bWillAdd = true;
 					while (itOpenListAdd != m_pOpenList->end())
 					{
 						CGridNode* myNodePointer = *itOpenListAdd;
 						if (myNodePointer == NeighbourNodePointer)
 						{
-							m_pOpenList->push_back(myNodePointer);
+							bWillAdd = false;
 							break;
 						}
 						itOpenListAdd++;
+					}
+					if (bWillAdd)
+					{
+						m_pOpenList->push_back(NeighbourNodePointer);
 					}
 				}
 				
