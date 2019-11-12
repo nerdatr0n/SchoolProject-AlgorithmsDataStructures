@@ -43,6 +43,8 @@ int CGridNode::GetHCost()
 
 int CGridNode::GetFCost()
 {
+	m_iFCost = m_iHCost + m_iGCost;
+
 	return m_iFCost;
 }
 
@@ -52,4 +54,24 @@ CGridNode * CGridNode::GetCameFrom()
 }
 
 
+int CGridNode::GetX()
+{
+	return m_iX;
+}
 
+int CGridNode::GetY()
+{
+	return m_iY;
+}
+
+
+
+char CGridNode::GetDisplayType()
+{
+	return cDisplayType;
+}
+
+void CGridNode::SetDisplayType(char _cDisplayType)
+{
+	cDisplayType = _cDisplayType;
+}

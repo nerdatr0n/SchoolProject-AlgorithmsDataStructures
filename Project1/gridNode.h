@@ -24,7 +24,9 @@ public:
 	
 	void SetCameFrom(CGridNode* _pCameFrom);
 
-
+	
+	int GetX();
+	int GetY();
 
 	int GetGCost();
 	int GetHCost();
@@ -32,7 +34,8 @@ public:
 	
 	CGridNode* GetCameFrom();
 
-
+	char GetDisplayType();
+	void SetDisplayType(char _cDisplayType);
 
 
 private:
@@ -45,5 +48,7 @@ private:
 	int m_iFCost;
 
 	CGridNode* m_pCameFrom;
+
+	char cDisplayType = '.';
 
 };

@@ -27,15 +27,28 @@
 #include "display.h"
 
 #include "graph.h"
+#include "grid.h"
+
 
 using namespace std;
 
 void AStarAlgorithm()
 {
-	Grid
+	PathFinding PathFind(1, 1, 4, 7);
 
+	if (PathFind.FindPath())
+	{
+		PathFind.CalculatePath();
+	}
+	else
+	{
+		cout << "No path";
+	}
 
-	Astar
+	PathFind.DrawGrid();
+
+	int iTemp = 0;
+	cin >> iTemp;
 }
 
 
@@ -364,7 +377,7 @@ void InputMenu()
 		// A* algorithm
 		if (iInput == 1)
 		{
-
+			AStarAlgorithm();
 		}
 
 		// Search
