@@ -38,7 +38,7 @@ void AStarAlgorithm()
 
 	PathFind.SetNodeAsBlocker(3, 3);
 	PathFind.SetNodeAsBlocker(3, 2);
-
+	PathFind.SetNodeAsBlocker(8, 8);
 	if (PathFind.FindPath())
 	{
 		PathFind.CalculatePath();

@@ -123,24 +123,24 @@ bool PathFinding::FindPath()
 					vector<CGridNode*>::iterator itOpenListAdd = m_pOpenList->begin();
 				
 
-					if (m_pOpenList->size() == 0) 
+				if (m_pOpenList->size() == 0) 
+				{
+					m_pOpenList->push_back(NeighbourNodePointer);
+				}
+				else 
+				{
+					while (itOpenListAdd != m_pOpenList->end())
 					{
-						m_pOpenList->push_back(NeighbourNodePointer);
-					}
-					else 
-					{
-						while (itOpenListAdd != m_pOpenList->end())
+						CGridNode* myNodePointer = *itOpenListAdd;
+						if (myNodePointer == NeighbourNodePointer)
 						{
-							CGridNode* myNodePointer = *itOpenListAdd;
-							if (myNodePointer == NeighbourNodePointer)
-							{
-								m_pOpenList->push_back(myNodePointer);
-								break;
-							}
-							itOpenListAdd++;
+							m_pOpenList->push_back(myNodePointer);
+							break;
 						}
+						itOpenListAdd++;
 					}
-					
+				}
+				
 
 				
 
